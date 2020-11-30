@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2020 a las 16:44:25
+-- Tiempo de generación: 30-11-2020 a las 17:29:17
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_cursa`
 --
+CREATE DATABASE IF NOT EXISTS `bd_cursa` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bd_cursa`;
 
 -- --------------------------------------------------------
 
@@ -31,28 +33,29 @@ CREATE TABLE `tbl_categoria` (
   `id_categoria` int(11) NOT NULL,
   `Sexo` enum('Masculino','Femenino') NOT NULL,
   `edad_min` int(3) NOT NULL,
-  `edad_max` int(3) NOT NULL
+  `edad_max` int(3) NOT NULL,
+  `nombre_categoria` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbl_categoria`
 --
 
-INSERT INTO `tbl_categoria` (`id_categoria`, `Sexo`, `edad_min`, `edad_max`) VALUES
-(1, 'Masculino', 0, 6),
-(2, 'Masculino', 7, 12),
-(3, 'Masculino', 13, 18),
-(4, 'Masculino', 19, 30),
-(5, 'Masculino', 31, 45),
-(6, 'Masculino', 46, 60),
-(7, 'Masculino', 61, 999),
-(8, 'Femenino', 0, 6),
-(9, 'Femenino', 7, 12),
-(10, 'Femenino', 13, 18),
-(11, 'Femenino', 19, 30),
-(12, 'Femenino', 31, 45),
-(13, 'Femenino', 46, 60),
-(14, 'Femenino', 61, 999);
+INSERT INTO `tbl_categoria` (`id_categoria`, `Sexo`, `edad_min`, `edad_max`, `nombre_categoria`) VALUES
+(1, 'Masculino', 0, 6, 'Bebes'),
+(2, 'Masculino', 7, 12, 'Infantil'),
+(3, 'Masculino', 13, 18, 'Junior'),
+(4, 'Masculino', 19, 30, 'Promesa'),
+(5, 'Masculino', 31, 45, 'Senior'),
+(6, 'Masculino', 46, 60, 'Veteranos'),
+(7, 'Masculino', 61, 999, 'Master'),
+(8, 'Femenino', 0, 6, 'Bebes'),
+(9, 'Femenino', 7, 12, 'Infantil'),
+(10, 'Femenino', 13, 18, 'Junior'),
+(11, 'Femenino', 19, 30, 'Promesa'),
+(12, 'Femenino', 31, 45, 'Senior'),
+(13, 'Femenino', 46, 60, 'Veteranas'),
+(14, 'Femenino', 61, 999, 'Master');
 
 -- --------------------------------------------------------
 
@@ -105,7 +108,12 @@ CREATE TABLE `tbl_inscripcion` (
 INSERT INTO `tbl_inscripcion` (`id_inscripcion`, `DNI_participante`, `id_cursa`, `id_categoria`) VALUES
 (1, '49494095G', 1, 4),
 (44, '49494095A', 1, 4),
-(74, '47186464D', 1, 4);
+(74, '47186464D', 1, 4),
+(80, '49494095G', 1, 6),
+(81, '49494095G', 1, 4),
+(82, '49494095G', 1, 1),
+(86, '24036555Z', 1, 7),
+(87, '49494095G', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -130,9 +138,10 @@ CREATE TABLE `tbl_participante` (
 --
 
 INSERT INTO `tbl_participante` (`DNI_participante`, `dorsal`, `nombre`, `primer_apellido`, `segundo_apellido`, `sexo`, `fecha_nacimiento`, `pagament`, `id_categoria`) VALUES
+('24036555Z', 7, 'Diego', 'Morillas', 'Marruecos', 'Masculino', '1936-06-10', 'Si', 7),
 ('47186464D', 5, 'pablo', 'verdejo', 'hernandez', 'Masculino', '2000-10-30', 'Si', 4),
 ('49494095A', 3, 'Carlos', 'Rueda', 'Morillas', 'Masculino', '2000-02-01', 'Si', 4),
-('49494095G', 4, 'dani', 'Rueda', 'Morillas', 'Masculino', '2013-01-07', 'Si', 2);
+('49494095G', 8, 'Danny', 'Larrea', 'Jimenez', 'Masculino', '1990-10-09', 'Si', 4);
 
 --
 -- Índices para tablas volcadas
@@ -200,7 +209,7 @@ ALTER TABLE `tbl_cursaparticipante`
 -- AUTO_INCREMENT de la tabla `tbl_inscripcion`
 --
 ALTER TABLE `tbl_inscripcion`
-  MODIFY `id_inscripcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_inscripcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Restricciones para tablas volcadas
