@@ -29,7 +29,7 @@ class participanteDAO{
                     foreach($conseguir_id as $id){
                     $id_categoria=$id['id_categoria'];
                     }
-                    print_r($sentencia_cat);
+                    //print_r($sentencia_cat);
                     $this->pdo->beginTransaction();
                     $query_dorsal="SELECT max(dorsal) FROM tbl_participante";
                     $sentencia_dorsal=$this->pdo->prepare($query_dorsal);
@@ -56,15 +56,15 @@ class participanteDAO{
                     $sentencia2->execute();
                     $this->pdo->commit();
 
-                    echo "INSCRIPCION HECHA";
-                    echo "<br>";
-                    ?>
-                    <div class="boton_volver">
-                    <?php
-                    echo "<a href='../index.html'>Volver a la pagina principal</a>";
-                    ?>
-                    </div>
-                    <?php
+                    $query_inscripcion="SELECT nombre_categoria FROM tbl_categoria WHERE edad_min<=$edad AND edad_max>=$edad AND Sexo='$sexo'";
+                    $sentencia_inscripcion=$this->pdo->prepare($query_inscripcion);
+                    $sentencia_inscripcion->execute();
+                    $conseguir_nombre=$sentencia_inscripcion->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($conseguir_nombre as $nombre){
+                    $nombre_categoria=$nombre['nombre_categoria'];
+                    }
+                    $inscripcion=$nombre_categoria;
+                    header("Location: form_inscripcion.php?inscripcion=$inscripcion");
                     // echo "<a href='../index.html'>Volver a la pagina principal</a>";
 
             }else{

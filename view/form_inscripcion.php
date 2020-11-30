@@ -18,30 +18,41 @@
 <form action="inscripcion.php" onsubmit="return validacionForm(dni)" id="form" method="POST">
     <h2> INTRODUCE TUS DATOS </h2>
     <p>DNI</p><input type="text" name="dni" id="dni" size="40">
-    <p>Nombre</p><input type="text" name="nombre" id="nombre" size="40">
-    <p>Primer apellido</p><input type="text" name="papellido" id="papellido" size="40">
-    <p>Segundo apellido</p><input type="text" name="sapellido" id="sapellido" size="40">
-    <p>Fecha de nacimiento</p><input type="date" name="fecha_nac" id="fecha_nac" size="40">
-    <p>Email</p><input type="text" name="email" id="email" size="40">
+    <div id="dni_mensaje" class="dni_mensaje"></div>
+    <p>Nombre</p><input type="text" name="nombre" class="validar" id="nombre" size="40">
+    <p>Primer apellido</p><input type="text" name="papellido" class="validar" id="papellido" size="40">
+    <p>Segundo apellido</p><input type="text" name="sapellido" class="validar" id="sapellido" size="40">
+    <p>Fecha de nacimiento</p><input type="date" name="fecha_nac" class="validar" id="fecha_nac" size="40">
+    <div id="cat_mensaje" class="cat_mensaje"></div>
+    <p>Email</p><input type="text" name="email" id="email" class="validar" size="40">
     <p>Sexo</p>
         <select name="sexo" id="sexo">
-            <option value="Escoge tu sexo">Escoge tu sexo</option>
+            <option value="Escoge tu sexo" id="Escoge"class="validar">Escoge tu sexo</option>
             <option value="Masculino">Hombre</option>
             <option value="Femenino">Mujer</option>
         </select>
         </p>
       <input type="submit" value="Inscribirme">
     
-    <div id="message" class="message"></div>
-  </form>
-  <?php
+    <div id="message" class="message">
+    <?php
   if(isset($_GET['error1'])){
       $error1=$_GET['error1'];
-      echo $error1;
+      //echo $error1;
+      echo "<p style='Background-Color:red; border-radius: 4px; padding: 8px; margin-right: 20px; text-align: center; width:100%;'>".$error1."</p>";
+      echo "<br>";
+      echo "<br>";
+  }
+  if(isset($_GET['inscripcion'])){
+    $inscripcion=$_GET['inscripcion'];
+      echo "<p style='Background-Color:green; border-radius: 4px; padding: 8px; margin-right: 20px; text-align: center; width:100%;'>Inscipcion hecha, perteneces a la categoria de ".$inscripcion."</p>";
       echo "<br>";
       echo "<br>";
   }
   ?>
+    </div>
+  </form>
+  
   <div class="boton_volver">
   <?php
   echo "<a href='../index.html'>Volver a la pagina principal</a>";
